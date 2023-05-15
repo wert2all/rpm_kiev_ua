@@ -2,7 +2,11 @@
   "name": "cv",
   "version": "1.0.0",
   "description": "CV",
-  "scripts": {},
+  "scripts": {
+    "lint:commit": "commitlint --from HEAD --to origin/main --verbose --verbose",
+    "lint:ng": "ng lint",
+    "format": "ng lint --fix"
+  },
   "packageManager": "^pnpm@8.3.1",
   "engines": {
     "node": ">=18",
