@@ -1,0 +1,34 @@
+variables:
+  DOCKER_IMAGE: ${DOCKER_REGISTRY}/wert2all/cv/cicd:latest
+
+stages:
+  - docker
+  - dependencies
+  - test
+  - build
+  - publish
+
+prepare_docker_image:
+  stage: docker
+  tags:
+    - docker-push
+  script:
+    - docker build ./ -f infra/Dockerfile -t ${DOCKER_IMAGE}
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD wert2all.nsupdate.info:5050
+    - docker push ${DOCKER_IMAGE}
+install_dependencies:
+  image: $DOCKER_IMAGE
+  stage: dependencies
+  needs:
+    - 'prepare_docker_image'
+  tags:
+    - docker
+  script:
+    - pnpm install
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - node_modules
+
