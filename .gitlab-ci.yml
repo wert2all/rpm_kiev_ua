@@ -48,3 +48,23 @@ lint:commit:
     paths:
       - node_modules
     policy: pull
+
+build:
+  image: $DOCKER_IMAGE
+  stage: build
+  needs:
+    - 'install_dependencies'
+  tags:
+    - docker
+  script:
+    - pnpm build
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - node_modules
+    policy: pull
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/dist
