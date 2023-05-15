@@ -1,5 +1,5 @@
-a {
-  @apply  text-primary transition duration-150 ease-in-out
+body a {
+  @apply text-primary transition duration-150 ease-in-out
   hover:text-primary-600 hover:underline
   focus:text-primary-600
   active:text-primary-700
