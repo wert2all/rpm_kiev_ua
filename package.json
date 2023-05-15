@@ -5,6 +5,7 @@
   "scripts": {
     "lint:commit": "commitlint --from HEAD --to origin/main --verbose --verbose",
     "lint:ng": "ng lint",
+    "lint:css" : "npx stylelint '**/*.{scss, css}'",
     "format": "ng lint --fix"
   },
   "packageManager": "^pnpm@8.3.1",
@@ -26,5 +27,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "stylelint": "^15.6.1",
+    "stylelint-config-standard-scss": "^9.0.0"
   }
 }
