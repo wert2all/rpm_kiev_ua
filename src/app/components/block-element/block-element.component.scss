@@ -1,8 +1,12 @@
-.block-title{
+.block-container {
+  @apply pb-2
+}
+
+.block-title {
   @apply mb-3
 }
 
-.block-content{
+.block-content {
   @apply ml-6 pl-2 border-l-2 border-gray-300
 }
 
