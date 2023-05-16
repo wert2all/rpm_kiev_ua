@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Commit } from '../types/commit.type';
+import { ApiCommit } from '../types/commit.type';
 import { ENV } from '../app.module';
 import { Environment } from '../types/environment';
 
@@ -12,7 +12,9 @@ export class CommitLogsService {
   ) {}
 
   getLog = () =>
-    this.http.get<Commit[]>(this.getApiUrl('projects/51/repository/commits'));
+    this.http.get<ApiCommit[]>(
+      this.getApiUrl('projects/51/repository/commits')
+    );
 
   getApiUrl = (call: string): string =>
     this.env.apiPath + call + '?access_token=' + this.env.apiToken;

@@ -1,0 +1,34 @@
+<div class="card float-right max-h-60 w-[400px] overflow-auto">
+  <div class="title"><h2>CV log</h2></div>
+  <div class="content">
+    <div class="alert danger" *ngIf="error !== null">{{ error }}</div>
+    <ol class="commits-container">
+      <li *ngFor="let item of commits">
+        <span class="avatar">
+          <img
+            ngxGravatar
+            [email]="item.email"
+            alt="{{ item.user }}"
+            [size]="24" />
+        </span>
+        <div class="commit-wrapper">
+          <div class="mb-3 items-center justify-between sm:flex">
+            <time>{{ when(item) }}</time>
+            <div class="commit">
+              {{ item.user }} закоммітив
+              <span class="commit-type {{ item.commitType }}">
+                {{ item.commitType }}:
+              </span>
+              <span class="commit-title">
+                {{ item.commitTitle }}
+              </span>
+            </div>
+          </div>
+          <div class="summary" *ngIf="item.summary !== ''">
+            {{ item.summary }}
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
