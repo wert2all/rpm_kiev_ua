@@ -11,7 +11,7 @@
     "lint:commit": "commitlint --from HEAD --to origin/main --verbose --verbose",
     "lint:ng": "ng lint",
     "lint:css": "stylelint '**/*.{scss, css}'",
-    "format": "ng lint --fix && stylelint '**/*.{scss, css}'",
+    "format": "ng lint --fix && stylelint '**/*.{scss, css}' --fix",
     "lint": "ng lint"
   },
   "packageManager": "^pnpm@8.3.1",
