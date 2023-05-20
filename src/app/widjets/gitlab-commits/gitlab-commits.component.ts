@@ -24,7 +24,7 @@ export class GitlabCommitsComponent {
             ? new Commit(
                 apiCommit.committer_name,
                 apiCommit.committer_email,
-                new Date(),
+                new Date(apiCommit.committed_date),
                 parsedTitle.type,
                 parsedTitle.title
               )
