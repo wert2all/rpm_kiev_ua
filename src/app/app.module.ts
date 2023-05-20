@@ -7,13 +7,24 @@ import { IndexPageComponent } from './pages/index/index-page.component';
 import { BlockElementComponent } from './components/block-element/block-element.component';
 import { Environment } from './types/environment';
 import { environment } from 'src/environments/environment';
+import { GitlabCommitsComponent } from './widjets/gitlab-commits/gitlab-commits.component';
+import { GravatarModule } from 'ngx-gravatar';
+import { HttpClientModule } from '@angular/common/http';
 
 export const ENV = new InjectionToken<Environment>('env');
 
 @NgModule({
-  declarations: [AppComponent, IndexPageComponent, BlockElementComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [{ provide: ENV, useFactory: () => environment }],
+  declarations: [
+    AppComponent,
+    IndexPageComponent,
+    BlockElementComponent,
+    GitlabCommitsComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, GravatarModule, HttpClientModule],
+  providers: [
+    HttpClientModule,
+    { provide: ENV, useFactory: () => environment },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
