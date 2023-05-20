@@ -5,6 +5,7 @@ export interface ApiCommit {
   parent_ids: string[];
   committer_email: string;
   committer_name: string;
+  committed_date: string;
 }
 export enum CommitType {
   FEAT = 'feat',
