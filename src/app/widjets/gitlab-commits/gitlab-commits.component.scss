@@ -31,8 +31,12 @@
   @apply bg-success-100 text-success-700;
 }
 
-.commits-container li .commit .commit-type.bug {
+.commits-container li .commit .commit-type.fix {
   @apply bg-danger-100  text-danger-700;
+}
+
+.commits-container li .commit .commit-type.refactor {
+  @apply bg-danger-100  text-danger-500;
 }
 
 .commits-container li .commit .commit-title {
