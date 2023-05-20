@@ -8,7 +8,8 @@ export interface ApiCommit {
 }
 export enum CommitType {
   FEAT = 'feat',
-  BUG = 'bug',
+  FIX = 'fix',
+  REFACTOR = 'refactor',
 }
 export class Commit {
   constructor(
