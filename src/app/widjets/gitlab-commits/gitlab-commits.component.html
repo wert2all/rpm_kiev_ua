@@ -2,8 +2,10 @@
   <div class="title"><h2>CV log</h2></div>
   <div class="content">
     <div class="alert danger" *ngIf="error !== null">{{ error }}</div>
-    <ol class="commits-container">
-      <li *ngFor="let item of commits">
+    <ol
+      class="commits-container"
+      *ngIf="error === null && (commits | async) !== null">
+      <li *ngFor="let item of commits | async">
         <span class="avatar">
           <img
             ngxGravatar

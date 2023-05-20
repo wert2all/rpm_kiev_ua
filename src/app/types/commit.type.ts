@@ -1,5 +1,10 @@
+import { enumFromStringValue } from '../common/utils';
+
 export interface ApiCommit {
-  user: string;
+  title: string;
+  parent_ids: string[];
+  committer_email: string;
+  committer_name: string;
 }
 export enum CommitType {
   FEAT = 'feat',
@@ -15,3 +20,6 @@ export class Commit {
     readonly summary = ''
   ) {}
 }
+
+export const createCommitType = (value: string) =>
+  enumFromStringValue(CommitType, value);

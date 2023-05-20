@@ -4,7 +4,9 @@ import { ApiCommit } from '../types/commit.type';
 import { ENV } from '../app.module';
 import { Environment } from '../types/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CommitLogsService {
   constructor(
     private http: HttpClient,
@@ -16,6 +18,6 @@ export class CommitLogsService {
       this.getApiUrl('projects/51/repository/commits')
     );
 
-  getApiUrl = (call: string): string =>
+  private getApiUrl = (call: string): string =>
     this.env.apiPath + call + '?access_token=' + this.env.apiToken;
 }

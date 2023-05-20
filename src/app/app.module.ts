@@ -9,6 +9,7 @@ import { Environment } from './types/environment';
 import { environment } from 'src/environments/environment';
 import { GitlabCommitsComponent } from './widjets/gitlab-commits/gitlab-commits.component';
 import { GravatarModule } from 'ngx-gravatar';
+import { HttpClientModule } from '@angular/common/http';
 
 export const ENV = new InjectionToken<Environment>('env');
 
@@ -19,8 +20,11 @@ export const ENV = new InjectionToken<Environment>('env');
     BlockElementComponent,
     GitlabCommitsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, GravatarModule],
-  providers: [{ provide: ENV, useFactory: () => environment }],
+  imports: [BrowserModule, AppRoutingModule, GravatarModule, HttpClientModule],
+  providers: [
+    HttpClientModule,
+    { provide: ENV, useFactory: () => environment },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
