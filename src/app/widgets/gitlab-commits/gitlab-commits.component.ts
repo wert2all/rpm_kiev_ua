@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Commit, createCommitType } from '../../common/commit.type';
 import formatRelative from 'date-fns/formatRelative';
 import { uk } from 'date-fns/locale';
-import { Observable, map } from 'rxjs';
+import { Observable, map, finalize } from 'rxjs';
 import { CommitLogsService } from '../../services/commit-logs-service';
 
 @Component({
@@ -13,6 +13,7 @@ import { CommitLogsService } from '../../services/commit-logs-service';
 export class GitlabCommitsComponent {
   constructor(private commitsService: CommitLogsService) {}
   error: string | null = null;
+  isLoading = true;
 
   commits: Observable<Commit[]> = this.commitsService.getLog().pipe(
     map(data => {
@@ -32,7 +33,8 @@ export class GitlabCommitsComponent {
         })
         .filter(commit => commit != undefined)
         .map(commit => commit as Commit);
-    })
+    }),
+    finalize(() => (this.isLoading = false))
   );
 
   when = (commit: Commit): string =>

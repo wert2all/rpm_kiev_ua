@@ -1,6 +1,7 @@
 <div class="card float-right max-h-60 w-[400px] overflow-auto">
   <div class="title"><h2>CV log</h2></div>
   <div class="content">
+    <cv-spinner *ngIf="isLoading"></cv-spinner>
     <div class="alert danger" *ngIf="error !== null">{{ error }}</div>
     <ol
       class="commits-container"
