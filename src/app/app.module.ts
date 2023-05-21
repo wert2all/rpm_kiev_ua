@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexPageComponent } from './pages/index/index-page.component';
 import { BlockElementComponent } from './components/block-element/block-element.component';
-import { Environment } from './types/environment';
+import { Environment } from './common/environment';
 import { environment } from 'src/environments/environment';
-import { GitlabCommitsComponent } from './widjets/gitlab-commits/gitlab-commits.component';
+import { GitlabCommitsComponent } from './widgets/gitlab-commits/gitlab-commits.component';
 import { GravatarModule } from 'ngx-gravatar';
 import { HttpClientModule } from '@angular/common/http';
 

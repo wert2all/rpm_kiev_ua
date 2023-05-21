@@ -10,14 +10,13 @@
           <img
             ngxGravatar
             [email]="item.email"
-            alt="{{ item.user }}"
+            alt="{{ item.user }} закоммітив"
             [size]="24" />
         </span>
         <div class="commit-wrapper">
           <div class="items-center justify-between sm:flex">
             <time>{{ when(item) }}</time>
             <div class="commit">
-              {{ item.user }} закоммітив
               <span class="commit-type {{ item.commitType }}">
                 {{ item.commitType }}:
               </span>

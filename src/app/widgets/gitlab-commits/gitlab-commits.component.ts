@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Commit, createCommitType } from '../../types/commit.type';
+import { Commit, createCommitType } from '../../common/commit.type';
 import formatRelative from 'date-fns/formatRelative';
 import { uk } from 'date-fns/locale';
 import { Observable, map } from 'rxjs';

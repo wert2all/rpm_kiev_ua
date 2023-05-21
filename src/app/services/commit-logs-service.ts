@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiCommit } from '../types/commit.type';
+import { ApiCommit } from '../common/commit.type';
 import { ENV } from '../app.module';
-import { Environment } from '../types/environment';
+import { Environment } from '../common/environment';
 
 @Injectable({
   providedIn: 'root',

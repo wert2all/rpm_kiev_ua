@@ -1,4 +1,4 @@
-import { enumFromStringValue } from '../common/utils';
+import { enumFromStringValue } from './utils';
 
 export interface ApiCommit {
   title: string;
