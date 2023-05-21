@@ -49,6 +49,40 @@ lint:commit:
       - node_modules
     policy: pull
 
+lint:ng:
+  image: $DOCKER_IMAGE
+  stage: test
+  needs:
+    - 'install_dependencies'
+  tags:
+    - docker
+  script:
+    - pnpm lint:ng
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - node_modules
+    policy: pull
+
+lint:css:
+  image: $DOCKER_IMAGE
+  stage: test
+  needs:
+    - 'install_dependencies'
+  tags:
+    - docker
+  script:
+    - pnpm lint:css
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - node_modules
+    policy: pull
+
 build:
   image: $DOCKER_IMAGE
   stage: build
