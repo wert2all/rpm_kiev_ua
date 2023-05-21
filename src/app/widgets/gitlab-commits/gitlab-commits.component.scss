@@ -32,11 +32,15 @@
 }
 
 .commits-container li .commit .commit-type.fix {
-  @apply bg-danger-100  text-danger-700;
+  @apply bg-danger-100 text-danger-700;
 }
 
 .commits-container li .commit .commit-type.refactor {
-  @apply bg-danger-100  text-danger-500;
+  @apply bg-danger-100 text-danger-500;
+}
+
+.commits-container li .commit .commit-type.ci {
+  @apply bg-info-100 text-info-500;
 }
 
 .commits-container li .commit .commit-title {

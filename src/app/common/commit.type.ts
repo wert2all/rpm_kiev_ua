@@ -11,6 +11,7 @@ export enum CommitType {
   FEAT = 'feat',
   FIX = 'fix',
   REFACTOR = 'refactor',
+  CI = 'ci',
 }
 export class Commit {
   constructor(
