@@ -1,4 +1,4 @@
-import { Environment } from 'src/app/types/environment';
+import { Environment } from 'src/app/common/environment';
 
 export const environment: Environment = {
   production: true,
