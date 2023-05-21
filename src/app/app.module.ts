@@ -12,6 +12,7 @@ import { GravatarModule } from 'ngx-gravatar';
 import { HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { IndexPageComponent } from './pages/index/index-page.component';
+import { PrivacyPolicyPageComponent } from './pages/privacy-policy/privacy-policy-page.component';
 
 export const ENV = new InjectionToken<Environment>('env');
 
@@ -23,6 +24,7 @@ export const ENV = new InjectionToken<Environment>('env');
     GitlabCommitsComponent,
     SpinnerComponent,
     IndexPageComponent,
+    PrivacyPolicyPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, GravatarModule, HttpClientModule],
   providers: [
