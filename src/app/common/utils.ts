@@ -1,8 +1,8 @@
 export function enumFromStringValue<T>(
-  enumObj: { [s: string]: T },
+  enumObject: { [s: string]: T },
   value: string
 ): T | undefined {
-  return (Object.values(enumObj) as unknown as string[]).includes(value)
+  return (Object.values(enumObject) as unknown as string[]).includes(value)
     ? (value as unknown as T)
     : undefined;
 }

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Commit, createCommitType } from '../../types/commit.type';
 import formatRelative from 'date-fns/formatRelative';
 import { uk } from 'date-fns/locale';
-import { Observable, map, tap } from 'rxjs';
-import { CommitLogsService } from '../../services/CommitLogsService';
+import { Observable, map } from 'rxjs';
+import { CommitLogsService } from '../../services/commit-logs-service';
 
 @Component({
   selector: 'cv-gitlab-commits',
@@ -20,17 +20,17 @@ export class GitlabCommitsComponent {
         .filter(commit => commit.parent_ids.length == 1)
         .map(apiCommit => {
           const parsedTitle = this.parseCommitTitle(apiCommit.title);
-          return parsedTitle != null
-            ? new Commit(
+          return parsedTitle == undefined
+            ? null
+            : new Commit(
                 apiCommit.committer_name,
                 apiCommit.committer_email,
                 new Date(apiCommit.committed_date),
                 parsedTitle.type,
                 parsedTitle.title
-              )
-            : null;
+              );
         })
-        .filter(commit => commit != null)
+        .filter(commit => commit != undefined)
         .map(commit => commit as Commit);
     })
   );
@@ -40,9 +40,9 @@ export class GitlabCommitsComponent {
 
   private parseCommitTitle(title: string) {
     const match = /^([a-z]+):.?(.+)/gm.exec(title);
-    if (match != null && match[2].trim() != '') {
+    if (match != undefined && match[2].trim() != '') {
       const type = createCommitType(match[1]);
-      if (type != null) {
+      if (type != undefined) {
         return { type: type, title: match[2] };
       }
     }

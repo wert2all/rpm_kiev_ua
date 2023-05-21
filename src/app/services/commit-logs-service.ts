@@ -10,7 +10,7 @@ import { Environment } from '../types/environment';
 export class CommitLogsService {
   constructor(
     private http: HttpClient,
-    @Inject(ENV) private env: Environment
+    @Inject(ENV) private environment: Environment
   ) {}
 
   getLog = () =>
@@ -19,5 +19,8 @@ export class CommitLogsService {
     );
 
   private getApiUrl = (call: string): string =>
-    this.env.apiPath + call + '?access_token=' + this.env.apiToken;
+    this.environment.apiPath +
+    call +
+    '?access_token=' +
+    this.environment.apiToken;
 }
