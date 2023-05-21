@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ApiCommit } from '../common/commit.type';
 import { ENV } from '../app.module';
 import { Environment } from '../common/environment';
+import { fromFetch } from 'rxjs/fetch';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +15,16 @@ export class CommitLogsService {
     @Inject(ENV) private environment: Environment
   ) {}
 
-  getLog = () =>
-    this.http.get<ApiCommit[]>(
-      this.getApiUrl('projects/51/repository/commits')
+  fetch = () =>
+    fromFetch(this.getApiUrl('projects/51/repository/commits')).pipe(
+      switchMap(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error number: ' + response.status);
+        }
+      }),
+      map((data: never[]) => data.map(item => item as ApiCommit))
     );
 
   private getApiUrl = (call: string): string =>

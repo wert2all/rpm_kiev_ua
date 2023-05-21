@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 import { GitlabCommitsComponent } from './widgets/gitlab-commits/gitlab-commits.component';
 import { GravatarModule } from 'ngx-gravatar';
 import { HttpClientModule } from '@angular/common/http';
-import { SpinnerComponent } from './widgets/spinner/spinner.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 export const ENV = new InjectionToken<Environment>('env');
 
