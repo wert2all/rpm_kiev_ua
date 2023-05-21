@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Commit, createCommitType } from '../../common/commit.type';
 import formatRelative from 'date-fns/formatRelative';
 import { uk } from 'date-fns/locale';
-import { Observable, map, finalize } from 'rxjs';
+import { map, finalize, catchError, of } from 'rxjs';
 import { CommitLogsService } from '../../services/commit-logs-service';
 
 @Component({
@@ -15,9 +15,9 @@ export class GitlabCommitsComponent {
   error: string | null = null;
   isLoading = true;
 
-  commits: Observable<Commit[]> = this.commitsService.getLog().pipe(
-    map(data => {
-      return data
+  commits = this.commitsService.fetch().pipe(
+    map(data =>
+      data
         .filter(commit => commit.parent_ids.length == 1)
         .map(apiCommit => {
           const parsedTitle = this.parseCommitTitle(apiCommit.title);
@@ -32,11 +32,14 @@ export class GitlabCommitsComponent {
               );
         })
         .filter(commit => commit != undefined)
-        .map(commit => commit as Commit);
-    }),
-    finalize(() => (this.isLoading = false))
+        .map(commit => commit as Commit)
+    ),
+    finalize(() => (this.isLoading = false)),
+    catchError(() => {
+      this.error = 'Could not load commits';
+      return of([]);
+    })
   );
-
   when = (commit: Commit): string =>
     formatRelative(commit.time, new Date(), { locale: uk });
 
