@@ -6,7 +6,7 @@ stages:
   - dependencies
   - test
   - build
-  - publish
+  - deploy
 
 prepare_docker_image:
   stage: docker
@@ -16,6 +16,7 @@ prepare_docker_image:
     - docker build ./ -f infra/Dockerfile -t ${DOCKER_IMAGE}
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD wert2all.nsupdate.info:5050
     - docker push ${DOCKER_IMAGE}
+
 install_dependencies:
   image: $DOCKER_IMAGE
   stage: dependencies
@@ -98,7 +99,38 @@ build:
         - pnpm-lock.yaml
     paths:
       - node_modules
+      - dist
     policy: pull
   artifacts:
     paths:
       - $CI_PROJECT_DIR/dist
+
+deploy:
+  stage: deploy
+  image: $DOCKER_IMAGE
+  tags:
+    - deploy
+  needs:
+    - 'build'
+  script:
+    - ls -al dist/cv
+    - which rsync || ( apk update && apk add rsync )
+    - which ssh-agent || ( apk update && apk add openssh-client)
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - rsync -rzh ./dist/cv/* $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH --delete-after --delete
+
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - node_modules
+      - dist
+    policy: pull
+  only:
+    - tags
