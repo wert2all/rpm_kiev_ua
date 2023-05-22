@@ -4,4 +4,5 @@ export const environment: Environment = {
   production: true,
   apiPath: 'https://wert2all.nsupdate.info/api/v4/',
   apiToken: '{%API_TOKEN%}',
+  sentryDsn: '{%SENTRY_DSN%}',
 };

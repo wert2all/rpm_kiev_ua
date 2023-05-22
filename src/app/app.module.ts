@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { ErrorHandler, InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { IndexPageComponent } from './pages/index/index-page.component';
 import { PrivacyPolicyPageComponent } from './pages/privacy-policy/privacy-policy-page.component';
-
+import * as Sentry from '@sentry/angular-ivy';
 export const ENV = new InjectionToken<Environment>('env');
 
 @NgModule({
@@ -29,6 +29,12 @@ export const ENV = new InjectionToken<Environment>('env');
   imports: [BrowserModule, AppRoutingModule, GravatarModule, HttpClientModule],
   providers: [
     HttpClientModule,
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: false,
+      }),
+    },
     { provide: ENV, useFactory: () => environment },
   ],
   bootstrap: [AppComponent],
