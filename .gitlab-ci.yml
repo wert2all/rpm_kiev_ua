@@ -92,8 +92,9 @@ build:
   tags:
     - docker
   script:
-    - sed -i "s/{%API_TOKEN%}/$API_TOKEN/g" src/environments/environment.ts
-    - sed -i "s/{%SENTRY_DSN%}/$SENTRY_DSN/g" src/environments/environment.ts
+    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
+    - rm ./src/environments/environment.ts
+    - cp .secure_files/environment.production.ts ./src/environments/environment.ts
     - pnpm build
   cache:
     key:
@@ -116,8 +117,6 @@ deploy:
     - 'build'
   script:
     - ls -al dist/cv
-    - which rsync || ( apk update && apk add rsync )
-    - which ssh-agent || ( apk update && apk add openssh-client)
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
