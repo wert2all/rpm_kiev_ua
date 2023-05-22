@@ -135,4 +135,4 @@ deploy:
       - dist
     policy: pull
   only:
-    - tags
+    - master
