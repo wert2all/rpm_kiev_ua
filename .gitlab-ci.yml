@@ -93,6 +93,7 @@ build:
     - docker
   script:
     - sed -i "s/{%API_TOKEN%}/$API_TOKEN/g" src/environments/environment.ts
+    - sed -i "s/{%SENTRY_DSN%}/$SENTRY_DSN/g" src/environments/environment.ts
     - pnpm build
   cache:
     key:
