@@ -134,4 +134,4 @@ deploy:
       - dist
     policy: pull
   only:
-    - master
+    - main
