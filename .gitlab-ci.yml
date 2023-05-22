@@ -92,6 +92,7 @@ build:
   tags:
     - docker
   script:
+    - sed -i "s/{%API_TOKEN%}/$API_TOKEN/g" src/environments/environment.ts
     - pnpm build
   cache:
     key:
