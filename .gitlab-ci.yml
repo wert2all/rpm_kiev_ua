@@ -1,5 +1,5 @@
 variables:
-  DOCKER_IMAGE: ${DOCKER_REGISTRY}/wert2all/cv/cicd:latest
+  DOCKER_IMAGE: ${DOCKER_REGISTRY}/wert2all/rpm.kiev.ua/cicd:latest
 
 stages:
   - docker
@@ -14,7 +14,7 @@ prepare_docker_image:
     - docker-push
   script:
     - docker build ./ -f infra/Dockerfile -t ${DOCKER_IMAGE}
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD wert2all.nsupdate.info:5050
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${DOCKER_REGISTRY}
     - docker push ${DOCKER_IMAGE}
 
 install_dependencies:
