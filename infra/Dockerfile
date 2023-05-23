@@ -1,6 +1,6 @@
 FROM node:19-alpine
-ENV DATE=20230522
-ENV PNPM_VERSION=8.3.1
+ENV DATE=20230523
+ENV PNPM_VERSION=8.5.1
 
 WORKDIR /app
 RUN apk update && apk upgrade \
